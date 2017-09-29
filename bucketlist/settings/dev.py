@@ -1,6 +1,7 @@
 # Define development specific settings
 
-import os, sys
+import os
+import sys
 import dotenv
 
 from .base import *

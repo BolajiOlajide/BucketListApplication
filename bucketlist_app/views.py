@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
+
 # Create your views here.
-def index():
+def index(request):
     """Root route for the application."""
-    render('index.html', {"name": "Bolaji"})
+    return render(request, 'index.html')

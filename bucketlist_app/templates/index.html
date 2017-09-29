@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="bl-homepage">
+		<h1 class="bl-centralized-text"> Welcome to my BucketList Application </h1>
+		<div class="bl-homepage-form">
+			<!-- Username (or e-mail address) -->
+			<div class="field">
+				<label class="label">Username/E-mail Address</label>
+				<div class="control">
+					<input class="input" type="text" placeholder="enter your username">
+				</div>
+			</div>
+
+			<!-- Password -->
+			<div class="field">
+				<label class="label">Password</label>
+				<div class="control">
+					<input class="input" type="password" placeholder="enter your password">
+				</div>
+			</div>
+
+			<!-- Submit Button -->
+			<a class="button is-black is-large">Login</a>
+		</div>
+	</div>
+{% endblock %}

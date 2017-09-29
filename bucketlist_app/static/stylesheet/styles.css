@@ -1,0 +1,36 @@
+.bl-homepage {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: url('../images/jakob-owens-168406.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100vw;
+	height: 100vh;
+	font-family: 'Dosis', sans-serif;
+	color: white;
+}
+
+.bl-centralized-text {
+	margin: 0 !important;
+	text-align: center;
+	font-size: 400% !important;
+}
+
+.bl-homepage-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 22%;
+	padding: 0 !important;
+}
+
+.field {
+	width: 100%;
+}
+
+.field > .label {
+	color: white;
+}
