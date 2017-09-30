@@ -10,8 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     {% if environment == 'development' %}
       <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.css' %}" />
+      <link rel="stylesheet" type="text/css" href="{% static 'bower_components/toastr/toastr.css' %}" />
     {% else %}
       <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}" />
+      <link rel="stylesheet" type="text/css" href="{% static 'bower_components/toastr/toastr.min.css' %}" />
     {% endif %}
     <link rel="stylesheet" type="text/css" href="{% static 'bower_components/bulma/css/bulma.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/styles.css' %}" />
@@ -22,8 +24,10 @@
     {% block footer %}{% endblock footer %}
     {% if environment == 'development' %}
       <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+      <script src="{% static 'bower_components/toastr/toastr.js' %}"></script>
     {% else %}
       <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+      <script src="{% static 'bower_components/toastr/toastr.min.js' %}"></script>
     {% endif %}
     <script src="{% static 'script.js' %}"></script>
   </body>

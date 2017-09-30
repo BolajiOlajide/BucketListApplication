@@ -5,4 +5,5 @@ from bucketlist_app import views
 
 urlpatterns = [
     url(r'^$', views.index, name="homepage"),
+    url(r'^dashboard/$', views.dashboard, name="dashboard"),
 ]
