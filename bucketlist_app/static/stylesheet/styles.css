@@ -96,3 +96,9 @@
 .modal-card-body {
 	width: 80%;
 }
+
+.bl-full-width {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
