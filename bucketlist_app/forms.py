@@ -1,64 +1,87 @@
 """Module for creating forms."""
-from django import forms
+
+from django.forms import (
+    Form,
+    ModelForm,
+    CharField,
+    EmailField,
+    TextInput,
+    EmailInput,
+    PasswordInput
+)
+
+from .models import Bucketlist, Items
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField(
+class LoginForm(Form):
+    username = CharField(
         max_length=20,
         error_messages={'required': 'Please enter your name'},
-        widget=forms.TextInput(attrs={
+        widget=TextInput(attrs={
             'class': 'input',
             'placeholder': 'enter your username'
         }))
-    password = forms.CharField(
+    password = CharField(
         max_length=12,
         error_messages={'required': 'Password is required'},
-        widget=forms.PasswordInput(attrs={
+        widget=PasswordInput(attrs={
             'class': 'input',
             'placeholder': 'enter your password'
         }))
 
 
-class SignUpForm(forms.Form):
-    first_name = forms.CharField(
+class SignUpForm(Form):
+    first_name = CharField(
         max_length=20,
         error_messages={'required': 'Please enter your first name'},
-        widget=forms.TextInput(attrs={
+        widget=TextInput(attrs={
             'class': 'input',
             'placeholder': 'enter your first name'
         }))
-    last_name = forms.CharField(
+    last_name = CharField(
         max_length=20,
         error_messages={'required': 'Please enter your last name'},
-        widget=forms.TextInput(attrs={
+        widget=TextInput(attrs={
             'class': 'input',
             'placeholder': 'enter your last name'
         }))
-    username = forms.CharField(
+    username = CharField(
         max_length=20,
         error_messages={'required': 'username is required'},
-        widget=forms.TextInput(attrs={
+        widget=TextInput(attrs={
             'class': 'input',
             'placeholder': 'enter your username'
         }))
-    email_address = forms.EmailField(
+    email_address = EmailField(
         error_messages={'required': 'Email is required'},
-        widget=forms.EmailInput(attrs={
+        widget=EmailInput(attrs={
             'class': 'input',
             'placeholder': 'enter your email address'
         })
     )
-    password = forms.CharField(
+    password = CharField(
         max_length=12,
         error_messages={'required': 'Password is required'},
-        widget=forms.PasswordInput(attrs={
+        widget=PasswordInput(attrs={
             'class': 'input',
             'placeholder': 'enter your password'
         }))
-    password2 = forms.CharField(
+    password2 = CharField(
         max_length=12,
         error_messages={'required': 'Password is required'},
-        widget=forms.PasswordInput(attrs={
+        widget=PasswordInput(attrs={
             'class': 'input',
             'placeholder': 'confirm your password'
         }))
+
+
+class BucketListForm(ModelForm):
+    class Meta:
+        model = Bucketlist
+        fields = ['name']
+        widgets = {
+            'name': TextInput(attrs={
+                'class': 'input',
+                'placeholder': 'Enter name for your bucketlist'
+            })
+        }

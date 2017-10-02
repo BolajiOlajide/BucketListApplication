@@ -1,104 +1,142 @@
 .bl-homepage {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background: url('../images/jakob-owens-168406.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	width: 100vw;
-	height: 100vh;
-	font-family: 'Dosis', sans-serif;
-	color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('../images/jakob-owens-168406.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Dosis', sans-serif;
+  color: white;
 }
 
 .bl-centralized-text {
-	margin: 0 !important;
-	text-align: center;
-	font-size: 400% !important;
-	font-weight: bold;
+  margin: 0 !important;
+  text-align: center;
+  font-size: 400% !important;
+  font-weight: bold;
 }
 
 .bl-centralized-text > span {
-	color: black;
+  color: black;
 }
 
 .bl-homepage-form {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 22%;
-	padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 22%;
+  padding: 0 !important;
 }
 
 .field {
-	width: 100%;
+  width: 100%;
 }
 
 .field > .label {
-	color: white;
+  color: white;
 }
 
 .bl-homepage-form > button {
-	background: none;
-	border: none;
+  background: none;
+  border: none;
 }
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-card {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-	width: 45%;
-	color: #000;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 45%;
+  color: #000;
 }
 
 /* The Close Button */
 .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .bl-signup {
-	width: 100%;
+  width: 100%;
 }
 
 .bl-black {
-	color: black !important;
+  color: black !important;
 }
 
 .modal-card-body {
-	width: 80%;
+  width: 80%;
 }
 
 .bl-full-width {
-	display: flex;
-	justify-content: center;
-	width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.bl-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: beige;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bl-navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4% 1%;
+}
+
+.bl-big-text {
+  font-size: 180%;
+}
+
+.bl-welcome-text {
+  font-size: 400% !important;
+  text-align: center;
+}
+
+.bl-bucketlists {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 45%;
+  margin: 1rem;
+}
+
+.fa {
+  cursor: pointer;
 }

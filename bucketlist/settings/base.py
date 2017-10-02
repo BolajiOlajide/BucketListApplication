@@ -117,5 +117,12 @@ STATICFILES_FINDERS = (
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'bucketlist_app/static')
 BOWER_INSTALLED_APPS = (
     'jquery',
-    'materialize',
+    'bulma',
 )
+
+ADMINS = [(dotenv.get('ADMIN_NAME'), dotenv.get('ADMIN_EMAIL'))]
+APPEND_SLASH = True
+DEFAULT_INDEX_TABLESPACE = ''
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'

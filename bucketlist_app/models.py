@@ -11,7 +11,7 @@ class Bucketlist(models.Model):
     updated_at = models.DateField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __repr__(self):
+    def __str__(self):
         return "BucketList: {}".format(self.name)
 
 
@@ -23,5 +23,5 @@ class Items(models.Model):
     done = models.BooleanField(default=False)
     bucketlist = models.ForeignKey(Bucketlist, on_delete=models.CASCADE)
 
-    def __repr__(self):
+    def __str__(self):
         return "Items: {}".format(self.name)

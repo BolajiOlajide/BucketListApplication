@@ -1,4 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
-	<h1>Welcome {{ user.first_name }}</h1>
+	<nav class="navbar is-dark bl-navbar">
+    <!-- navbar brand, navbar menu... -->
+    <span class="bl-big-text">BucketList Application</span>
+    <a class="button is-danger" href="{% url 'auth_logout' %}?next=/path_to_the_page">Logout</a>
+	</nav>
+	<div class="bl-dashboard">
+    <h1 class="bl-welcome-text">Welcome {{ user.first_name }}</h1>
+    <div class="bl-bucketlists columns is-multiline is-mobile">
+      {% if bucketlists %}
+        {% for bucketlist in bucketlists %}
+          <div class="card column is-one-quarter">
+            <div class="card-content">
+              <p class="title">
+                {{bucketlist.name}}
+              </p>
+              <p class="subtitle">
+                {{bucketlist.user.first_name}} {{bucketlist.user.last_name}}
+              </p>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                  <i class="fa fa-edit" style="font-size:1.5rem;color:black;"></i>
+              </p>
+              <p class="card-footer-item">
+                <i class="fa fa-trash" style="font-size:1.5rem;color:black;"></i>
+              </p>
+            </footer>
+          </div>
+        {% endfor %}
+      {% else %}
+          <span> You have no bucketlist currently! </span>
+      {% endif %}
+    </div>
+    <a class="button is-large is-primary" id="modal-button">Create New BucketList</a>
+  </div>
+  <!-- The Modal -->
+  <div id="modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Create a BucketList</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <form class="bl-homepage-form bl-signup" method="POST">				
+        <section class="modal-card-body">
+          {% csrf_token %}
+          {{ bucketlist_form }}
+        </section>
+        <footer class="modal-card-foot bl-full-width">
+          <button class="button is-success" type="submit">Create</button>
+          <button class="button bl-homepage-cancel">Cancel</button>
+        </footer>
+      </form>    
+  </div>
+  </div>      
 {% endblock %}

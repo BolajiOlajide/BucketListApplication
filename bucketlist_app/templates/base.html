@@ -21,14 +21,15 @@
   </head>
   <body>
     {% block content %}{% endblock content %}
-    {% block footer %}{% endblock footer %}
-    {% if environment == 'development' %}
-      <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
-      <script src="{% static 'bower_components/toastr/toastr.js' %}"></script>
-    {% else %}
-      <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-      <script src="{% static 'bower_components/toastr/toastr.min.js' %}"></script>
-    {% endif %}
-    <script src="{% static 'script.js' %}"></script>
+    {% block footer %}
+      {% if environment == 'development' %}
+        <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+        <script src="{% static 'bower_components/toastr/toastr.js' %}"></script>
+      {% else %}
+        <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'bower_components/toastr/toastr.min.js' %}"></script>
+      {% endif %}
+      <script src="{% static 'script.js' %}"></script>
+    {% endblock footer %}
   </body>
 </html>
