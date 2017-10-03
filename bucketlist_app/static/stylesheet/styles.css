@@ -155,3 +155,13 @@ body {
 .bl-stats {
   color: #01d1b2;
 }
+
+.bl-bucketlist-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bl-bucketlist-header > a {
+  margin-left: 1%;
+}

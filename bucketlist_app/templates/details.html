@@ -25,7 +25,10 @@
       </li>
     </ul>
   </nav>
-  <h1 class="bl-welcome-text">{{ bucketlist.name }}</h1>
+  <div class="bl-bucketlist-header">
+    <h1 class="bl-welcome-text">{{ bucketlist.name }}</h1>
+    <a class="button is-warning" id="modal-button">Add New Item</a>
+  </div>
   {% if items %}
     <div class="bl-bucketlists columns is-multiline is-mobile">
     {% for item in items %}
@@ -43,4 +46,23 @@
   {% else %}
     <p>There are no items currently. Create one </p>
   {% endif %}
+  <!-- The Modal -->
+  <div id="modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Create an Item in {{ bucketlist.name }}</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <form class="bl-homepage-form bl-signup" method="POST">				
+        <section class="modal-card-body">
+          {% csrf_token %}
+          {{ item_form }}
+        </section>
+        <footer class="modal-card-foot bl-full-width">
+          <button class="button is-success" type="submit">Create</button>
+          <button class="button bl-homepage-cancel">Cancel</button>
+        </footer>
+      </form>    
+  </div>
 {% endblock %}

@@ -107,6 +107,20 @@ def bucketlist_details(request, bucketlist_id):
     if _bucketlist:
         _items = Items.objects.filter(bucketlist=_bucketlist)
         item_form = ItemForm()
+        if (request.method == 'POST'):
+            print('kay')
+            form = ItemForm(request.POST)
+            _done = True if request.POST.get('done') else False
+            # import pdb;pdb.set_trace()
+            if form.is_valid():
+                _item, created = Items.objects.get_or_create(
+                    name=request.POST.get('name'),
+                    done=_done,
+                    bucketlist=_bucketlist
+                )
+            if created:
+                _item.save()
+            return redirect('details', bucketlist_id=_bucketlist.id)
         return render(request, 'details.html', {
             'bucketlist': _bucketlist,
             'items': _items,

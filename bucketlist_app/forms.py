@@ -7,7 +7,8 @@ from django.forms import (
     EmailField,
     TextInput,
     EmailInput,
-    PasswordInput
+    PasswordInput,
+    CheckboxInput
 )
 
 from .models import Bucketlist, Items
@@ -95,5 +96,8 @@ class ItemForm(ModelForm):
             'name': TextInput(attrs={
                 'class': 'input',
                 'placeholder': 'Enter an item'
+            }),
+            'done': CheckboxInput(attrs={
+                'required': False
             })
         }
