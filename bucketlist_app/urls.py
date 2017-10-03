@@ -1,4 +1,4 @@
-"""URL Definition for JoshGrid application."""
+"""URL Definition for Bucketlist application."""
 from django.conf.urls import url
 
 from bucketlist_app import views
