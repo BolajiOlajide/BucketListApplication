@@ -30,6 +30,21 @@
         <script src="{% static 'bower_components/toastr/toastr.min.js' %}"></script>
       {% endif %}
       <script src="{% static 'script.js' %}"></script>
+      <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+      <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = false;
+    
+        var pusher = new Pusher('ecb52b62be6652ebd7fd', {
+          cluster: 'eu',
+          encrypted: true
+        });
+    
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+          toastr.success(data.message);
+        });
+      </script>
     {% endblock footer %}
   </body>
 </html>

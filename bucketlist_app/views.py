@@ -1,10 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm, SignUpForm, BucketListForm
+from .forms import LoginForm, SignUpForm, BucketListForm, ItemForm
+from .helper import get_or_none
 from .models import Bucketlist, Items
+from .pusher import pusher_client
 
 
 # Create your views here.
@@ -46,8 +49,13 @@ def index(request):
                         login(request, user)
                         return redirect('dashboard')
                     else:
-                        return redirect('homepage')
-    return render(request, 'index.html', {"loginForm": loginForm, "signupForm": signupForm})
+                        pusher_client.trigger('my-channel', 'my-event', {
+                            'message': 'Invalid login credentials!'
+                        })
+    return render(request, 'index.html', {
+        "loginForm": loginForm,
+        "signupForm": signupForm
+    })
 
 
 @login_required
@@ -65,10 +73,13 @@ def dashboard(request):
             if created:
                 _bucketlist.save()
             return redirect('dashboard')
+    pusher_client.trigger('my-channel', 'my-event', {'message': 'hello world'})
+    count = len(bucketlists)
     return render(request, 'dashboard.html', {
         'user': user,
         'bucketlists': bucketlists,
-        'bucketlist_form': bucketlist_form
+        'bucketlist_form': bucketlist_form,
+        'count': count
     })
 
 
@@ -76,3 +87,29 @@ def dashboard(request):
 def logout_view(request):
     logout(request)
     return redirect('homepage')
+
+
+@login_required
+def delete_bucketlist(request, bucketlist_id):
+    _bucketlist = Bucketlist.objects.get(pk=bucketlist_id)
+    _name = _bucketlist.name
+    if _bucketlist:
+        _bucketlist.delete()
+    pusher_client.trigger('my-channel', 'my-event', {
+        'message': 'Bucketlist {} successfully deleted'.format(_name)
+    })
+    return redirect('dashboard')
+
+
+@login_required
+def bucketlist_details(request, bucketlist_id):
+    _bucketlist = get_or_none(Bucketlist, pk=bucketlist_id)
+    if _bucketlist:
+        _items = Items.objects.filter(bucketlist=_bucketlist)
+        item_form = ItemForm()
+        return render(request, 'details.html', {
+            'bucketlist': _bucketlist,
+            'items': _items,
+            'item_form': item_form
+        })
+    return redirect('dashboard')

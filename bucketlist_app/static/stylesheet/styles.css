@@ -140,3 +140,18 @@
 .fa {
   cursor: pointer;
 }
+
+body {
+  background: beige;
+  height: 100vh;
+  max-height: 100%;
+  width: 100%;
+}
+
+.bl-level {
+  margin-top: 0.8rem;
+}
+
+.bl-stats {
+  color: #01d1b2;
+}

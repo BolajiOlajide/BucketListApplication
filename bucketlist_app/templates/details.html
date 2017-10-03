@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+	<nav class="navbar is-dark bl-navbar">
+    <!-- navbar brand, navbar menu... -->
+    <span class="bl-big-text">BucketList Application</span>
+    <a class="button is-danger" href="{% url 'auth_logout' %}">Logout</a>
+  </nav>
+  <nav class="breadcrumb is-right" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <span class="icon is-small">
+          <i class="fa fa-home"></i>
+          </span><span>
+          <a href="{% url 'dashboard' %}">Dashboard</a>
+        </span>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">
+          <span class="icon is-small">
+            <i class="fa fa-bitbucket-square" aria-hidden="true"></i>
+            </span><span>
+            {{ bucketlist.name }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="bl-welcome-text">{{ bucketlist.name }}</h1>
+  {% if items %}
+    <div class="bl-bucketlists columns is-multiline is-mobile">
+    {% for item in items %}
+      <div class="card column is-half">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-4">{{ item.name }}</p>
+              <p class="subtitle is-6">Status: {{ item.done }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>There are no items currently. Create one </p>
+  {% endif %}
+{% endblock %}

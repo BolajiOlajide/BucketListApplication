@@ -85,3 +85,15 @@ class BucketListForm(ModelForm):
                 'placeholder': 'Enter name for your bucketlist'
             })
         }
+
+
+class ItemForm(ModelForm):
+    class Meta:
+        model = Items
+        fields = ['name', 'done']
+        widgets = {
+            'name': TextInput(attrs={
+                'class': 'input',
+                'placeholder': 'Enter an item'
+            })
+        }
