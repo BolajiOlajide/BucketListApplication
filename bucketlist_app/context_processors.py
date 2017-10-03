@@ -3,5 +3,5 @@ import os
 
 def set_environment(request):
     return {
-        'environment': os.getenv('NODE_ENV') if os.getenv('NODE_ENV') else 'development'
+        'environment': os.getenv('PY_ENV') if os.getenv('PY_ENV') else 'development'
     }

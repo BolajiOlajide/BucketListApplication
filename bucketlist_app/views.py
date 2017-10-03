@@ -16,14 +16,14 @@ def index(request):
     loginForm = LoginForm()
     signupForm = SignUpForm()
     if (request.method == "POST"):
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        password2 = request.POST.get('password2', None)
+        email = request.POST.get('email_address', None)
+        first_name = request.POST.get('first_name', None)
+        last_name = request.POST.get('last_name', None)
         if 'first_name' in request.POST:
             form = SignUpForm(request.POST)
-            username = request.POST.get('username', None)
-            password = request.POST.get('password', None)
-            password2 = request.POST.get('password2', None)
-            email = request.POST.get('email_address', None)
-            first_name = request.POST.get('first_name', None)
-            last_name = request.POST.get('last_name', None)
             if (password == password2) and form.is_valid():
                 user, created = User.objects.get_or_create(
                     username=username,
@@ -34,24 +34,19 @@ def index(request):
                 if created:
                     user.set_password(password)
                     user.save()
-                user = authenticate(username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    return redirect('dashboard')                           
+                user = authenticate(username=username, password=password)                       
         else:
             form = LoginForm(request.POST)
             if form.is_valid():
-                username = request.POST.get('username', None)
-                password = request.POST.get('password', None)
                 if username and password:
                     user = authenticate(username=username, password=password)
-                    if user is not None:
-                        login(request, user)
-                        return redirect('dashboard')
-                    else:
-                        pusher_client.trigger('my-channel', 'my-event', {
-                            'message': 'Invalid login credentials!'
-                        })
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            pusher_client.trigger('my-channel', 'my-event', {
+                'message': 'Invalid login credentials!'
+            })
     return render(request, 'index.html', {
         "loginForm": loginForm,
         "signupForm": signupForm

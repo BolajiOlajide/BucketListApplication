@@ -6,7 +6,8 @@ def get_or_none(classmodel, **kwargs):
 
 
 def pretty_date(time=False):
-    """
+    """Get timeago format
+    
     Get a datetime object or a int() Epoch timestamp and return a
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc

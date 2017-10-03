@@ -114,6 +114,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
 )
+
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'bucketlist_app/static')
 BOWER_INSTALLED_APPS = (
     'jquery',
