@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="bl-homepage">
+		<h1 class="bl-centralized-text"><span>Welc</span>ome to my BucketList App<span>lication</span></h1>
+		<form class="bl-homepage-form" method="POST">
+			{% csrf_token %}
+			<!-- Username -->
+			<div class="field">
+				<label class="label">Username</label>
+				<div class="control">
+						{{ loginForm.username }}
+				</div>
+			</div>
+
+			<!-- Password -->
+			<div class="field">
+				<label class="label">Password</label>
+				<div class="control">
+					{{ loginForm.password }}
+				</div>
+			</div>
+
+			<!-- Submit Button -->
+			<button type="submit"><a class="button is-black is-large">Login</a></button>
+		</form>
+		<!-- Trigger/Open The Modal -->
+		<button id="modal-button">Sign Upl</button>
+
+		<!-- The Modal -->
+		<div id="modal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Create an Account</p>
+					<button class="delete" aria-label="close"></button>
+				</header>
+				<form class="bl-homepage-form bl-signup" method="POST">						
+					<section class="modal-card-body">
+						<!-- Content ... -->
+								{% csrf_token %}
+								<!-- First Name  -->
+								<div class="field">
+									<label class="label bl-black">First Name</label>
+									<div class="control">
+											{{ signupForm.first_name }}
+									</div>
+								</div>
+
+								<!-- Last Name  -->
+								<div class="field">
+									<label class="label bl-black">Last Name</label>
+									<div class="control">
+											{{ signupForm.last_name }}
+									</div>
+								</div>
+								
+								<!-- Username  -->
+								<div class="field">
+									<label class="label bl-black">Username</label>
+									<div class="control">
+											{{ signupForm.username }}
+									</div>
+								</div>
+
+								<!-- Email address  -->
+								<div class="field">
+									<label class="label bl-black">E-mail Address</label>
+									<div class="control">
+											{{ signupForm.email_address }}
+									</div>
+								</div>
+					
+								<!-- Password -->
+								<div class="field">
+									<label class="label bl-black">Password</label>
+									<div class="control">
+										{{ signupForm.password }}
+									</div>
+								</div>
+
+								<!-- Password Confirm-->
+								<div class="field">
+									<label class="label bl-black">Confirm Password</label>
+									<div class="control">
+										{{ signupForm.password2 }}
+									</div>
+								</div>
+					</section>
+					<footer class="modal-card-foot bl-full-width">
+						<button class="button is-success" type="submit">Sign Up</button>
+						<button class="button bl-homepage-cancel">Cancel</button>
+					</footer>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

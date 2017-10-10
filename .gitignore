@@ -4,3 +4,6 @@
 __pycache__/
 *.pyc
 .vscode
+bucketlist_app/migrations/
+node_modules/
+bucketlist_app/static/bower_components/

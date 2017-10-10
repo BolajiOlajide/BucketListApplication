@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+	<nav class="navbar is-dark bl-navbar">
+    <!-- navbar brand, navbar menu... -->
+    <span class="bl-big-text">BucketList Application</span>
+    <a class="button is-danger" href="{% url 'auth_logout' %}">Logout</a>
+  </nav>
+  <nav class="level bl-level">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Bucketlist(s)</p>
+        <p class="title bl-stats">{{ count }}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Last Login</p>
+        <p class="title bl-stats">{{ user.last_login }}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Date joined</p>
+        <p class="title bl-stats">{{ user.date_joined|date:"D dS M Y" }}</p>
+      </div>
+    </div>
+  </nav>
+	<div class="bl-dashboard">
+    <h1 class="bl-welcome-text">Welcome {{ user.first_name }}</h1>
+    <div class="bl-bucketlists columns is-multiline is-mobile">
+      {% if bucketlists %}
+        {% for bucketlist in bucketlists %}
+          <div class="card column is-one-quarter">
+            <div class="card-content">
+              <p class="title">
+                {{bucketlist.name}}
+              </p>
+              <p class="subtitle">
+                {{bucketlist.user.first_name}} {{bucketlist.user.last_name}}
+              </p>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <a href="{% url 'details' bucketlist_id=bucketlist.id %}">
+                  <i class="fa fa-edit" style="font-size:1.5rem;color:black;">
+                  </i>
+                </a>
+              </p>
+              <p class="card-footer-item">
+                <a href="{% url 'delete_bucketlist' bucketlist_id=bucketlist.id %}">
+                  <i class="fa fa-trash" style="font-size:1.5rem;color:black;">
+                  </i>
+                </a>
+              </p>
+            </footer>
+          </div>
+        {% endfor %}
+      {% else %}
+          <span> You have no bucketlist currently! </span>
+      {% endif %}
+    </div>
+    <a class="button is-large is-primary" id="modal-button">
+      Create New BucketList
+    </a>
+  </div>
+  <!-- The Modal -->
+  <div id="modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Create a BucketList</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <form class="bl-homepage-form bl-signup" method="POST">				
+        <section class="modal-card-body">
+          {% csrf_token %}
+          {{ bucketlist_form }}
+        </section>
+        <footer class="modal-card-foot bl-full-width">
+          <button class="button is-success" type="submit">Create</button>
+          <button class="button bl-homepage-cancel">Cancel</button>
+        </footer>
+      </form>    
+  </div>
+  </div>      
+{% endblock %}

@@ -17,7 +17,7 @@ import dotenv
 dotenv.load()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bucketlist_app',
+    'djangobower',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bucketlist_app.context_processors.set_environment',
             ],
         },
     },
@@ -107,3 +109,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'bucketlist_app/static')
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'bulma',
+)
+
+ADMINS = [(dotenv.get('ADMIN_NAME'), dotenv.get('ADMIN_EMAIL'))]
+APPEND_SLASH = True
+DEFAULT_INDEX_TABLESPACE = ''
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'

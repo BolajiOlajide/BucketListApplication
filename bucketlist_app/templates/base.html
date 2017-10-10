@@ -2,52 +2,49 @@
 <!doctype html>
 <html>
   <head>
-    <title>
-      {% block title %}
-        BucketList Application
-      {% endblock title %}
-    </title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    {% block title %}
+      <title> 
+        BucketList
+      </title>
+    {% endblock title %}
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    {% if environment == 'development' %}
+      <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.css' %}" />
+      <link rel="stylesheet" type="text/css" href="{% static 'bower_components/toastr/toastr.css' %}" />
+    {% else %}
+      <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}" />
+      <link rel="stylesheet" type="text/css" href="{% static 'bower_components/toastr/toastr.min.css' %}" />
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bower_components/bulma/css/bulma.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/styles.css' %}" />
     {% block header %}{% endblock header %}
   </head>
   <body>
-    <div class="container-fluid">
-      <header>
-        <nav class="navbar navbar-toggleable-md sticky-top navbar-light bg-faded">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#">BucketList Application</a>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {% if user.is_authenticated %}          
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-              </li>
-            </ul>
-            {% endif %}
-            <div>
-              {% if user.is_authenticated %}
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{% url 'auth_logout' %}">Logout</a></button>
-              {% else %}
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{% url 'auth_login' %}">Login</a></button>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{% url 'registration_register' %}">Register</a></button>
-              {% endif %}
-            </div>
-          </div>
-        </nav>
-      </header>
-      {% block content %}{% endblock content %}
-      {% block footer %}{% endblock footer %}
-    </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    {% block content %}{% endblock content %}
+    {% block footer %}
+      {% if environment == 'development' %}
+        <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+        <script src="{% static 'bower_components/toastr/toastr.js' %}"></script>
+      {% else %}
+        <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'bower_components/toastr/toastr.min.js' %}"></script>
+      {% endif %}
+      <script src="{% static 'script.js' %}"></script>
+      <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+      <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = false;
+    
+        var pusher = new Pusher('ecb52b62be6652ebd7fd', {
+          cluster: 'eu',
+          encrypted: true
+        });
+    
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+          toastr.success(data.message);
+        });
+      </script>
+    {% endblock footer %}
   </body>
 </html>
